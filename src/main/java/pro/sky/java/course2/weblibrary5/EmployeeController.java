@@ -15,18 +15,15 @@ public class EmployeeController {
 
     @GetMapping(path = "/add")
     public String addEmployee(@RequestParam("firstName") String firstName , @RequestParam("lastName") String lastName){
-        employeeService.add(firstName, lastName);
-        return "Сотрудник добавлен : " + firstName + lastName ;
+        return "Сотрудник добавлен : " + employeeService.add(firstName,lastName);
     }
     @GetMapping(path = "/remove")
     public String removeEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName){
-        employeeService.remove(firstName,lastName);
-        return "Сотрудник удален : " + firstName + lastName;
+        return "Сотрудник удален : " + employeeService.remove(firstName,lastName);
     }
     @GetMapping(path = "/find")
     public String findEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName){
-        employeeService.findEmployee(firstName,lastName);
-        return "Сотрудник найден : " + firstName + lastName;
+        return "Сотрудник найден : " + employeeService.findEmployee(firstName,lastName);
     }
     @GetMapping(path = "/get")
     public Set<String> getEmployees(){

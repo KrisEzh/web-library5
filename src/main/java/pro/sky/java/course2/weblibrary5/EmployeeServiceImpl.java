@@ -20,22 +20,39 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public boolean add(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
-        return employees.add(String.valueOf(employee));
+    public Employee add(String firstName, String lastName) {
+        Employee newEmployee = new Employee(firstName, lastName);
+        return add(newEmployee);
+    }
+    @Override
+    public Employee add(Employee employee) {
+        if(!employees.add(String.valueOf(employee))) {
+            throw new EmployeeExistsException();
+        }
+       return employee;
     }
 
     @Override
-    public boolean remove(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
-        return employees.remove(String.valueOf(employee));
+    public Employee remove(String firstName, String lastName) {
+        Employee newEmployee = new Employee(firstName, lastName);
+            return remove(newEmployee);
     }
 
     @Override
-    public boolean findEmployee(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
-        if (employees.contains(employee)) {
+    public Employee remove(Employee employee) {
+        if (!employees.remove(String.valueOf(employee))) {
+            throw new EmployeeNotFoundException();
+        }
+        return employee;
+    }
 
-        } return true;
+    @Override
+    public Employee findEmployee(String firstName, String lastName) {
+        Employee employee = new Employee(firstName, lastName);
+        if (!employees.contains(String.valueOf(employee))) {
+            throw new EmployeeNotFoundException();
+        }
+        return employee;
     }
 }
+

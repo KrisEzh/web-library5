@@ -7,9 +7,13 @@ public interface EmployeeService {
 
     Set<String> getEmployees();
 
-    boolean add(String firstName, String lastName);
+    Employee add(String firstName, String lastName);
 
-    boolean remove(String firstName, String lastName) throws EmployeeNotFoundException;
+    Employee add(Employee employee);
 
-    boolean findEmployee(String firstName, String lastName) throws EmployeeNotFoundException;
+    Employee remove(String firstName, String lastName);
+
+    Employee remove(Employee employee);
+
+    Employee findEmployee(String firstName, String lastName);
 }
