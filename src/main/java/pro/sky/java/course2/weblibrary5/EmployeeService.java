@@ -1,11 +1,11 @@
 package pro.sky.java.course2.weblibrary5;
 
 
-import java.util.Set;
+import java.util.Collection;
 
 public interface EmployeeService {
 
-    Set<String> getEmployees();
+    Collection<Employee> getEmployees();
 
     Employee add(String firstName, String lastName);
 
@@ -15,5 +15,5 @@ public interface EmployeeService {
 
     Employee remove(Employee employee);
 
-    Employee findEmployee(String firstName, String lastName);
+    Object findEmployee(String firstName, String lastName);
 }

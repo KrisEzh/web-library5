@@ -2,7 +2,7 @@ package pro.sky.java.course2.weblibrary5;
 
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
+import java.util.Collection;
 
 @RestController
 @RequestMapping("/employee")
@@ -26,7 +26,8 @@ public class EmployeeController {
         return "Сотрудник найден : " + employeeService.findEmployee(firstName,lastName);
     }
     @GetMapping(path = "/get")
-    public Set<String> getEmployees(){
+    public Collection<Employee> getEmployees(){
         return employeeService.getEmployees();
+
     }
 }
