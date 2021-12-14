@@ -17,14 +17,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Collection<Employee> getEmployees() {
-        for (Employee employee : employees.values()) {
-            System.out.println(employee);
-
-        }
-
         return employees.values();
     }
-
 
     @Override
     public Employee add(String firstName, String lastName) {
@@ -34,8 +28,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee add(Employee employee) {
-        employees.put(employee.getFirstName()+employee.getLastName(), employee);
-        return employee;
+        if (employees.containsKey(employee.getFirstName() + employee.getLastName())) {
+            throw new EmployeeExistsException();
+        } else {
+            employees.put(employee.getFirstName() + employee.getLastName(), employee);
+            return employee;
+        }
     }
 
     @Override
@@ -46,7 +44,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee remove(Employee employee) {
-        employees.remove(employee.getFirstName()+employee.getLastName(), String.valueOf(employee));
+        if (employees.containsKey(employee.getFirstName() + employee.getLastName())) {
+            employees.remove(employee.getFirstName() + employee.getLastName(), employee);
+        } else {
+            throw new EmployeeNotFoundException();
+        }
         return employee;
     }
 
