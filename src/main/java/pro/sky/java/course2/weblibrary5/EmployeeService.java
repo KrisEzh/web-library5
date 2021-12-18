@@ -2,8 +2,10 @@ package pro.sky.java.course2.weblibrary5;
 
 
 import java.util.Collection;
+import java.util.List;
 
 public interface EmployeeService {
+
 
     Collection<Employee> getEmployees();
 
@@ -16,4 +18,6 @@ public interface EmployeeService {
     Employee remove(Employee employee);
 
     Object findEmployee(String firstName, String lastName);
+
+
 }
