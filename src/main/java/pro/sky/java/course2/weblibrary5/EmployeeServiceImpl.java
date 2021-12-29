@@ -1,6 +1,7 @@
 package pro.sky.java.course2.weblibrary5;
 
 import org.springframework.stereotype.Service;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 
@@ -17,26 +18,35 @@ public class EmployeeServiceImpl implements EmployeeService {
     Employee employee1 = new Employee("Петр", "Петров", 2, 20);
     Employee employee2 = new Employee("Сидр", "Сидоров", 1, 30);
 
-    @Override
-    public Collection<Employee> getEmployees() {
-    return employees.values();
-    }
 
     @Override
-    public Employee add(String firstName, String lastName) {
-        Employee newEmployee = new Employee(firstName, lastName, 1, 10);
-        return add(newEmployee);
+    public Collection<Employee> getEmployees() {
+        return employees.values();
     }
+
+
+    @Override
+    public Employee add(String firstName, String lastName) throws BadRequestException {
+        Employee newEmployee = new Employee(firstName, lastName, 1, 10);
+        //StringUtils.capitalize(firstName);
+        if (StringUtils.isAlphaSpace(firstName) && StringUtils.isAlphaSpace(lastName)) {
+            return add(newEmployee);
+        } else {
+            throw new BadRequestException();
+        }
+    }
+
 
     @Override
     public Employee add(Employee employee) {
-        if (employees.containsKey(employee.getFirstName() + employee.getLastName())) {
-            throw new EmployeeExistsException();
-        } else {
-            employees.put(employee.getFirstName() + employee.getLastName(), employee);
-            return employee;
+            if (employees.containsKey(employee.getFirstName() + employee.getLastName())) {
+                throw new EmployeeExistsException();
+            } else {
+                employees.put(employee.getFirstName() + employee.getLastName(), employee);
+                return employee;
+            }
         }
-    }
+
 
 
     @Override
