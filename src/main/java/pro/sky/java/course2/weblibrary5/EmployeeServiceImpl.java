@@ -24,18 +24,15 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employees.values();
     }
 
-
     @Override
     public Employee add(String firstName, String lastName) throws BadRequestException {
-        Employee newEmployee = new Employee(firstName, lastName, 1, 10);
-        //StringUtils.capitalize(firstName);
-        if (StringUtils.isAlphaSpace(firstName) && StringUtils.isAlphaSpace(lastName)) {
-            return add(newEmployee);
-        } else {
-            throw new BadRequestException();
-        }
+        if (!(StringUtils.isAlphaSpace(firstName) && StringUtils.isAlphaSpace(lastName))) {
+        throw new BadRequestException();
     }
+        Employee newEmployee = new Employee(StringUtils.capitalize(firstName), StringUtils.capitalize(lastName), 1, 10);
+        return add(newEmployee);
 
+    }
 
     @Override
     public Employee add(Employee employee) {
@@ -46,7 +43,6 @@ public class EmployeeServiceImpl implements EmployeeService {
                 return employee;
             }
         }
-
 
 
     @Override

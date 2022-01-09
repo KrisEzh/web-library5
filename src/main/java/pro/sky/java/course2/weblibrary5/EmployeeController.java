@@ -2,6 +2,7 @@ package pro.sky.java.course2.weblibrary5;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileNotFoundException;
 import java.util.Collection;
 
 @RestController
@@ -14,7 +15,7 @@ public class EmployeeController {
     }
 
     @GetMapping(path = "/add")
-    public String addEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
+    public String addEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) throws FileNotFoundException {
         return "Сотрудник добавлен : " + employeeService.add(firstName, lastName);
     }
 
